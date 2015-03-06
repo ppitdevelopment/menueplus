@@ -1,0 +1,42 @@
+<div data-role="page" data-theme="b" data-title="Kontoauszug" id="konto" ng-controller="KontoCtrl">
+
+	<div data-role="header" data-position="fixed" data-theme="a">
+		<div data-role="navbar" class="nav-glyphs">
+			<ul>
+				<li><a href="#" id="startBtn" ng-click="start()" data-icon="custom">Start...</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /header -->
+
+	<div class="jqmpage" data-role="content">
+		<div class="ui-grid-a ui-responsive">
+			<div class="ui-block-a">
+				<div data-role="fieldcontain">
+					<label for="startDate"> von: </label>
+					<input type="text" class="required" name="startDate" id="startDate" ng-model="selectedStartDate" />
+				</div>
+			</div>
+			<div class="ui-block-b">
+				<div data-role="fieldcontain">
+					<label for="endDate">&nbsp; bis: </label>
+					<input type="text" class="required" name="endDate" id="endDate" ng-model="selectedEndDate" />
+				</div>
+			</div>
+		</div><br/>
+		<ul data-role="listview" data-divider-theme="b" data-theme="d">
+			<li data-theme="e" ngm-if="isLoaded"><span class="ui-li-aside"><strong">{{aktuellSaldo | currency}}</strong></span>Aktuelles Guthaben: </li>
+			<li ngm-if="buchungen.length != 0" data-role="list-divider" role="heading"><span id="endGuthaben" class="betrag ui-li-aside">{{endGuthaben | currency}}</span>Guthaben am <span class="date">{{endDate | date: mediumDate}}</span></li>
+			<li ng-repeat="buchung in buchungen">
+			<h3 class="ui-li-aside">Betrag: <strong>{{buchung.betrag | currency}}</strong></h3>
+			<h3>{{buchung.datum}}</h3>
+			<p>{{buchung.text}} - {{buchung.vorname}} {{buchung.name}}</p>
+			</li>
+			<li ngm-if="buchungen.length == 0"><p>Keine Buchung im gewählten Zeitraum.</p></li>
+			<li ngm-if="buchungen.length != 0" data-role="list-divider" role="footer"><span id="startGuthaben" class="betrag ui-li-aside">{{startGuthaben | currency}}</span>Guthaben am <span class="date">{{startDate | date: mediumDate}}</span></li>
+		</ul><br/>
+		<!-- <span>{{debug}}</span> -->
+	</div>
+	<!-- /content -->
+</div>
+<!-- /page -->

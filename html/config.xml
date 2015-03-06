@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        xmlns:android   = "http://schemas.android.com/apk/res/android"
+        id = "com.ppit.issmenueplus"
+        version = "1.7"
+        versionCode="466">
+	<name>ISS Menü+</name>
+	<description>
+	    People and Projects IT GmbH © 2013 - 2015
+	</description>
+	<author href="http://www.people-projects-it.com" email="produktentwicklung@people-projects-it.com">
+	    Aleksei Podgaev @ People and Projects IT GmbH © 2013-2015
+	</author>
+	<gap:platform name="android" />
+	<icon src="icon.png" />
+	<icon src="assets/android/icon-mdpi48.png" gap:platform="android" gap:qualifier="mdpi" />
+	<icon src="assets/icon-72.png" gap:platform="android" gap:qualifier="hdpi" />
+	<icon src="assets/android/icon-xhdpi96.png" gap:platform="android" gap:qualifier="xhdpi" />
+	<icon src="assets/ios/icon-ios144.png" gap:platform="android" gap:qualifier="xxhdpi" />
+	<icon src="assets/android/icon-xxxhdpi192.png" gap:platform="android" gap:qualifier="xxxhdpi" />
+	<gap:splash src="splash.png" />
+	<gap:splash src="assets/android/launchscreen-xhdpi.9.png" gap:platform="android" gap:qualifier="xhdpi" />
+	<gap:splash src="assets/android/launchscreen-hdpi.9.png" gap:platform="android" gap:qualifier="hdpi" />
+	<gap:splash src="assets/android/launchscreen-mdpi.9.png" gap:platform="android" gap:qualifier="mdpi" />
+	<preference name="phonegap-version" value="3.5.0" />
+	<preference name="orientation" value="default" />
+	<preference name="target-device" value="universal" />
+	<preference name="fullscreen" value="false" />
+	<preference name="android-installLocation" value="auto" />
+	<gap:plugin name="org.apache.cordova.device" version="0.2.12" />
+	<gap:plugin name="org.apache.cordova.file" version="1.3.1" />
+	<!-- <gap:plugin name="org.apache.cordova.Storage" /> -->
+	<!-- <plugin name="Camera" value="org.apache.cordova.CameraLauncher" /> -->
+	<preference name="permissions" value="none"/>
+	<!-- <feature name="http://api.phonegap.com/1.0/camera"/> -->
+	<!-- <feature name="http://api.phonegap.com/1.0/file"/> -->
+	<access origin="https://10.21.0.11" />
+	<access origin="https://m.ber.menuplus.de" />
+	<access origin="https://141.101.33.77" />
+	<access origin="https://m.people-projects-it.com" />
+	<access origin="https://m-proxy.people-projects-it.com" />
+</widget>

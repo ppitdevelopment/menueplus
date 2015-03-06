@@ -1,0 +1,92 @@
+<div data-role="page" data-theme="b" data-title="Stammdaten" id="profile" ng-controller="ProfileCtrl">
+
+	<div data-role="header" data-theme="a">
+		<div data-role="navbar" class="nav-glyphs">
+			<ul>
+				<li><a href="#" id="startBtn" ng-click="start()" data-icon="custom">Start...</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /header -->
+
+	<div class="jqmpage" data-role="content">
+		<ul data-role="listview" data-theme="d">
+			<li data-theme="e"><span>{{user.userFullName}}</span></li>
+			<li>
+				<table id="profileTable">
+					<tr>
+						<td><a href="#" ng-click="fotoMenu()" title="Bild ändern"><img src="css/images/default.png" ng-src="{{user.userPic}}" class="profile-pic" id="profile-pic" /></a></td>
+						<td>
+							<div data-role="navbar" class="nav-glyphs">
+								<ul>
+									<li><a href="#" ng-click="editPassword()" id="password" data-icon="custom" data-theme="d">Passwort ändern</a></li>
+								</ul>
+							</div>
+							<div data-role="navbar" class="nav-glyphs">
+								<ul>
+									<li><a href="#" ng-click="editOptions()" id="options" data-icon="custom" data-theme="d">Einstellungen</a></li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</li>
+		</ul>
+		<div id="fotoSelect" data-role="popup" data-theme="d" data-overlay-theme="b" data-transition="none" data-position-to="window">
+			<div data-role="header"><h1>Bild</h1></div>
+			<div data-role="content">
+				<div data-role="navbar" class="nav-glyphs">
+					<ul>
+						<li><a href="#" ng-click="uploadFoto(1)" id="camera" data-icon="custom" data-theme="d">Camera</a></li>
+					</ul>
+				</div>
+				<div data-role="navbar" class="nav-glyphs">
+					<ul>
+						<li><a href="#" ng-click="uploadFoto(2)" id="fotolib" data-icon="custom" data-theme="d">Foto wählen</a></li>
+					</ul>
+				</div>
+				<div data-role="navbar" class="nav-glyphs">
+					<ul>
+						<li><a href="#" ng-click="removeFoto()" id="fotodelete" data-icon="custom" data-theme="d">Löschen</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="optionsEdit" data-role="popup" data-theme="d" data-overlay-theme="b" data-transition="none" data-position-to="origin">
+			<div data-role="header"><h1>Einstellungen</h1></div>
+			<div data-role="content">
+				<label for="startSeite" class="select">Ihre Startseite:</label>
+				<select name="startSeite" id="startSeite" ng-model="startSeite" ng-options="option.name as option.title for option in pages" style="position: absolute;">
+				</select>
+				<fieldset class="ui-grid-a ui-responsive">
+					<div class="ui-block-a">
+						<button ng-click="saveOptions()" data-icon="check">OK</button>
+					</div>
+					<div class="ui-block-b">
+						<button ng-click="closePopup()" data-icon="delete" data-theme="c">Abbrechen</button>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		<div id="passwordEdit" data-role="popup" data-theme="d" data-overlay-theme="b" data-transition="none" data-position-to="window">
+			<div data-role="header"><h1>Passwort ändern</h1></div>
+			<div data-role="content">
+				<label for="password">Neues Passwort:</label>
+				<input name="password" id="password" value="" autocomplete="off" type="password" ng-model="pwd.pwd1" data-clear-btn="true">
+				<label for="password2">Wiederholung:</label>
+				<input name="password2" id="password2" value="" autocomplete="off" type="password" ng-model="pwd.pwd2" data-clear-btn="true">
+				<p ng-show="pwd.error" class="error">{{pwd.error}}</p>
+				<fieldset class="ui-grid-a ui-responsive">
+					<div class="ui-block-a">
+						<button ng-click="savePassword()" data-icon="check">OK</button>
+					</div>
+					<div class="ui-block-b">
+						<button ng-click="closePopup()" data-icon="delete" data-theme="c">Abbrechen</button>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+	<!-- /content -->
+</div>
+<!-- /page -->

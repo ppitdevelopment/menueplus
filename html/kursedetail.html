@@ -1,0 +1,112 @@
+<div data-role="page" data-theme="d" data-title="Kurse Detail" id="kurseDetailPage"
+	ng-controller="KurseDetailCtrl" ngm-swiperight="showPanel()">
+	<!-- 
+	<div data-role="panel" id="sidepanel" data-opened="sidePanelOpen">
+		TEST
+	</div> -->
+	<div data-role="header" data-position="fixed" data-theme="a">
+		<div data-role="navbar" class="nav-glyphs">
+			<ul>
+				<li><a href="#" id="startBtn" ng-click="start()"
+					data-icon="custom">Start...</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /header -->
+
+	<div class="jqmpage" data-role="content">
+		<ul data-role="listview" data-theme="d" data-divider-theme="e">
+			<li data-role="list-divider"><h1>{{kurs.kursstammdaten.name}}</h1></li>
+			<li><p ng-bind-html="kurs.kursstammdaten.beschreibung" style="overflow: none; display: inline; white-space: normal;"></p></li>
+			<li ng-show="kurs.anmeldedaten.bemerkung.length > 0">
+				<div class="ui-grid-a">
+					<div class="ui-block-a"><p><strong>Bemerkung</strong></p></div>
+					<div class="ui-block-b"><p><em>{{kurs.anmeldedaten.bemerkung}}</em></p></div>
+				</div>
+			</li>
+			<li ng-show="kurs.kursstammdaten.veranstalter.length > 0">
+				<div class="ui-grid-a">
+					<div class="ui-block-a"><p><strong>Veranstalter</strong></p></div>
+			    	<div class="ui-block-b"><p>{{kurs.kursstammdaten.veranstalter}}</p></div>
+				</div>
+			</li>
+			<li ng-show="kurs.kursstammdaten.kursleiter.length > 0">
+				<div class="ui-grid-a">
+					<div class="ui-block-a"><p><strong>Kursleiter</strong></p></div>
+			    	<div class="ui-block-b"><p>{{kurs.kursstammdaten.kursleiter}}</p></div>
+				</div>
+			</li>
+			<li>
+				<div class="ui-grid-a">
+					<div class="ui-block-a"><p><strong>Preis</strong></p></div>
+			    	<div class="ui-block-b"><p>{{ kurs.kursstammdaten.preis_pro_periode | currency: EUR}} / {{ kurs.kursstammdaten.periode }}</p></div>
+				</div>
+			</li>
+			<li ng-show="kurs.kursstammdaten.treffpunkt.length > 0">
+				<div class="ui-grid-a">
+					<div class="ui-block-a"><p><strong>Treffpunkt</strong></p></div>
+			    	<div class="ui-block-b"><p>{{kurs.kursstammdaten.treffpunkt}}</p></div>
+				</div>
+			</li>
+			<li>
+				<div class="ui-grid-a">
+					<div class="ui-block-a"><p><strong>Laufzeit</strong></p></div>
+			    	<div class="ui-block-b"><p>{{ kurs.kursstammdaten.laufzeit_von }}&nbsp;-&nbsp;{{ kurs.kursstammdaten.laufzeit_bis }}</p></div>
+				</div>
+			</li>
+			<li>
+				<div class="ui-grid-a">
+					<div class="ui-block-a"><p><strong>Anmeldung bis</strong></p></div>
+			    	<div class="ui-block-b"><p>{{kurs.kursstammdaten.anmeldung_bis}}</p></div>
+				</div>
+			</li>
+			<li data-role="list-divider" ng-show="kurs.termine.length > 0"><h2>Termine</h2></li>
+			<li ng-repeat="termin in kurs.termine">
+				<p>{{termin.start_zeit | date:'EEEE dd.MM.y'}}</p>
+				<p class="ui-li-aside">{{termin.start_zeit | date:'H:mm'}}&nbsp;-<span ng-show="termin.ende_zeit.getUTCDate() != termin.start_zeit.getUTCDate()">&nbsp;{{termin.ende_zeit | date:'dd.MM.y'}}</span>&nbsp;{{termin.ende_zeit | date:'H:mm'}}</p>
+			</li>
+		</ul>
+		<div id="kurseSubmitDialog" data-role="popup" data-opened="kurseSubmitDialog" data-theme="d" data-overlay-theme="a" data-position-to="window" data-transition="none" data-dismissible="false">
+			<div style="padding:10px 20px;">
+				<h3>Hier ist Raum für Bemerkungen</h3>
+				<textarea name="bemerkung" id="bemerkung" value="" placeholder="Hier ist Raum für Bemerkungen" data-theme="d" ng-model="inputBemerkung"></textarea>
+				<fieldset class="ui-grid-a ui-responsive">
+					<div class="ui-block-a">
+						<button data-theme="b" data-icon="check" ng-click="statusChange('10')">OK</button>
+					</div>
+					<div class="ui-block-b">
+						<button data-theme="c" data-icon="check" ng-click="closeDialog()">Abbrechen</button>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		<div id="errorPopup" data-role="popup" data-opened="errorMsg.length > 0" data-theme="d" data-overlay-theme="a" data-position-to="window" data-transition="none" data-dismissible="false">
+			<div data-role="header"><h1>Fehler</h1></div>
+			<div style="padding:10px 20px;">
+				<h3>{{errorMsg}}</h3>
+				<button data-theme="b" data-icon="check" ng-click="back()">OK</button>
+			</div>
+		</div>
+	</div>
+	<!-- /content -->
+	<div data-role="footer" data-id="kurseFooter" data-position="fixed"
+		data-theme="c">
+		<div data-role="navbar" class="nav-glyphs" ng-show="submitShow()">
+			<ul>
+				<li><a href="#" id="prev"
+					ng-click="back()" data-icon="arrow-l">Zurück</a></li>
+				<li><a href="#"
+					id="kurse_submit" ng-click="submit(kurs.buttonAction)"
+					data-icon="custom" ng-class="kurs.buttonAction">{{kurs.buttonTitle}}</a></li>
+			</ul>
+		</div>
+		<div data-role="navbar" class="nav-glyphs" ng-show="!submitShow()">
+			<ul>
+				<li><a href="#" id="prev"
+					ng-click="back()" data-icon="arrow-l">Zurück</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /footer -->
+</div>
+<!-- /page -->
