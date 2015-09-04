@@ -398,7 +398,7 @@ function KalenderCtrl3(Navigation, Teilnehmer, $scope, Kalend2, Auth, $routePara
 			if(angebot.detail_kostenart_id == "5946B518504DCEF79B6D74589C54D4D3") res = true;
 		}
 		return res;
-	}
+	};
 	// returns "true" if there are any events for this day
 	$scope.hasEvents = function(t) {
 		var al = t.events.length;
@@ -433,7 +433,7 @@ function KalenderCtrl3(Navigation, Teilnehmer, $scope, Kalend2, Auth, $routePara
 	 * functions for menues selection and saving it to DB
 	 */
 	$scope.selectMenue = function(tagIdx,detailIdx,angebotIdx,index) {
-		//console.log("selectMenue");
+		console.log("selectMenue");
 		//alert("$scope.selectedDate: " + $scope.selectedDate);
 		Settings.setDate($scope.selectedDate);
 		var l = $scope.kalend.details[tagIdx].detail_kostenarten[detailIdx].kostenarten[angebotIdx].menues.length;
@@ -461,6 +461,7 @@ function KalenderCtrl3(Navigation, Teilnehmer, $scope, Kalend2, Auth, $routePara
 		//alert("createDate($scope.selectedDate): " + d);
 		$scope.selectedMenue.selectedMenueDate = formatDate(d);
 		//alert("$scope.selectedMenue.selectedMenueDate: " + $scope.selectedMenue.selectedMenueDate);
+		console.log("selectMenue", $scope.selectedMenue);
 		$scope.menueNachricht = "";
 		$scope.nachricht_sekretariat = Kalend2.nachricht_sekretariat;
 		$("#postResult").html("");

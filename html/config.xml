@@ -3,14 +3,14 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android   = "http://schemas.android.com/apk/res/android"
         id = "com.ppit.issmenueplus"
-        version = "1.7"
-        versionCode="466">
+        version = "1.8"
+        versionCode="469">
 	<name>ISS Menü+</name>
 	<description>
-	    People and Projects IT GmbH © 2013 - 2015
+	    PAIR Solutions GmbH © 2013 - 2015
 	</description>
 	<author href="http://www.people-projects-it.com" email="produktentwicklung@people-projects-it.com">
-	    Aleksei Podgaev @ People and Projects IT GmbH © 2013-2015
+	    Aleksei Podgaev @ PAIR Solutions GmbH © 2013-2015
 	</author>
 	<gap:platform name="android" />
 	<icon src="icon.png" />

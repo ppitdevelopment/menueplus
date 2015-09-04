@@ -10,8 +10,6 @@ function KurseDetailCtrl($scope, Navigation, Auth, Kurse, $routeParams) {
 	$scope.kursId = 0;
 	// kurse object
 	$scope.kurs = {};
-	// side panel flag
-	$scope.sidePanelOpen = false;
 	// submit button flag
 	$scope.submitShow = function() {
 		var check = angular.isDefined($scope.kurs.buttonAction) && $scope.kurs.buttonAction.length > 0 && Kurse.getLastPage() != 'meine';
@@ -32,10 +30,6 @@ function KurseDetailCtrl($scope, Navigation, Auth, Kurse, $routeParams) {
 	$scope.start = function() {
 		Navigation.go("start");
 		//$location.path("/start");
-	};
-	
-	$scope.showPanel = function() {
-		$scope.sidePanelOpen = true;
 	};
 	
 	// submit button handler

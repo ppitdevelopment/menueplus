@@ -6,12 +6,6 @@ function KurseCtrl($scope, Navigation, Auth, Kurse) {
 	
 	$scope.mode = "index"; // index/meine
 	$scope.modeTitle = "Kursanmeldung";
-	// panel open flag
-	$scope.sidePanelOpen = false;
-	// show panel
-	$scope.showPanel = function() {
-		$scope.sidePanelOpen = true;
-	};
 	
 	// toogles current mode
 	$scope.toggle = function(btn) {

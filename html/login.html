@@ -1,7 +1,7 @@
-<div data-role="page" data-theme="b" data-title="Anmelden" id="login"
+<div data-role="page" data-theme="g" data-title="Anmelden" id="login"
 	ng-controller="AuthCtrl">
 
-	<div data-role="header" data-position="fixed" data-theme="a">
+	<div data-role="header" data-position="fixed" data-theme="f">
 		<h1>ISS Menü+</h1>
 	</div>
 	<!-- /header -->
@@ -16,16 +16,15 @@
 			bleiben</label>
 		<div class="ui-grid-solo">
 			<div class="ui-block-a" align="center">
-				<img id="logo" alt="Logo" src="css/images/logo.png">
+				<img id="logo" alt="Logo" src="" ng-src="{{logoSrc}}">
 			</div>
 		</div>
 	</div>
 	<!-- /content -->
-	<div data-role="footer" data-position="fixed"
-		data-theme="c">
+	<div data-role="footer" data-position="fixed" data-theme="d">
 		<fieldset class="ui-grid-solo">
 			<div class="ui-block-a">
-				<button ng-click="login()" data-icon="check" data-theme="b">Anmelden</button>
+				<button ng-click="login()" data-icon="check" data-theme="g">Anmelden</button>
 			</div>
 		</fieldset>
 	</div>

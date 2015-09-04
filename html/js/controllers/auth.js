@@ -5,6 +5,7 @@ function AuthCtrl($scope, Navigation, Auth, Settings) {
 	//console.log('AuthCtrl');
 	//console.log('version: ', Auth.version);
 	$scope.ctrlName = "AuthCtrl";
+	$scope.logoSrc = _LOGO;
 	
 	$scope.debug = false;
 	$scope.cred = {
