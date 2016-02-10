@@ -155,7 +155,7 @@ var KalendSvc = ppitServices.factory('Kalend2', ['Auth', 'Datasource', '$window'
 			//console.log('Kalender2.getWoche - wochen[wIndex]:', Kalender.wochen[wIndex]);
 			// copy requested data into resulting array
 			res = angular.copy(Kalender.wochen[wIndex]);
-			//console.log('Kalender2.getWoche - res:', res);
+			console.log('Kalender2.getWoche - res:', res);
 			// return resulting object
 			return res;			
 		} else {
@@ -237,7 +237,7 @@ var KalendSvc = ppitServices.factory('Kalend2', ['Auth', 'Datasource', '$window'
 				Kalender.cacheTimestamp = Kalender.today.getTime();
 				// parse and prepare for caching data
 				var tageArray = new Array();
-				//console.log("received: ", data);
+				console.log("kalender data received: ", data);
 				angular.forEach(data.kalender, function(value, index) {
 					var newValue = angular.copy(value);
 					// format the date
@@ -268,6 +268,7 @@ var KalendSvc = ppitServices.factory('Kalend2', ['Auth', 'Datasource', '$window'
 					}
 					this.push(newValue);
 				}, tageArray);
+				console.log("parsed kalender:", tageArray);
 				Kalender.tageRequestResult = tageArray;
 				Kalender.tagSuccessHandler();
 				/*

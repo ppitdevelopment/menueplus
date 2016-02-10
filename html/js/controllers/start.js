@@ -1,7 +1,7 @@
 'use strict';
 
 /* Start page controller */
-function StartCtrl($scope, Navigation, Auth, Kalend2, Kurse) {
+function StartCtrl($scope, Navigation, Auth, Kalend2, Kurse, Connection) {
 	//console.log("StartCtrl");
 	$scope.copyrightMsg = _COPYRIGHT;
 	$scope.goKonto = function() {
@@ -43,21 +43,25 @@ function StartCtrl($scope, Navigation, Auth, Kalend2, Kurse) {
 	};
 	
 	$scope.buttonClass = function(name) {
-		if($scope.pages.indexOf(name) == -1) {
+		//console.log("button class");
+		if(!!$scope.pages && $scope.pages.indexOf(name) == -1) {
 			return "ui-disabled";
 		} else {
 			return "";
 		}
 	};
 	
-	Auth.load();
-	if (Auth.loggedIn()) {
-		$scope.pages = Auth.pages;
-		$scope.anzahl_vertretungen = Auth.anzahl_vertretungen;
-		Navigation.setCurrent({page: 'start'});
-	} else {
-		Navigation.go("login");
-		//$location.url("/login");
-	}
+	Auth.load(function() {
+		if (Auth.loggedIn()) {
+			$scope.copyrightMsg += Connection.config.name;
+			//console.log("get pages");
+			$scope.pages = Auth.pages;
+			$scope.anzahl_vertretungen = Auth.anzahl_vertretungen;
+			Navigation.setCurrent({page: 'start'});
+		} else {
+			Navigation.go("login");
+			//$location.url("/login");
+		}
+	});
 }
-StartCtrl.$inject = [ '$scope', 'Navigation', 'Auth', 'Kalend2', 'Kurse' ];
+StartCtrl.$inject = [ '$scope', 'Navigation', 'Auth', 'Kalend2', 'Kurse', 'Connection' ];

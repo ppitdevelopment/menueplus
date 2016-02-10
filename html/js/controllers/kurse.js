@@ -60,20 +60,22 @@ function KurseCtrl($scope, Navigation, Auth, Kurse) {
 		//console.log($scope.kurse);
 	};
 	
-	Auth.load();
-	if (Auth.loggedIn()) {
-		if(Kurse.getLastPage() == 'meine') {
-			$scope.mode = "meine";
-			$scope.modeTitle = "Meine Kurse";
-			$("a#kurse_meine").addClass("ui-btn-active");
+	Auth.load(function() {
+		if (Auth.loggedIn()) {
+			if(Kurse.getLastPage() == 'meine') {
+				$scope.mode = "meine";
+				$scope.modeTitle = "Meine Kurse";
+				$("a#kurse_meine").addClass("ui-btn-active");
+			} else {
+				$("a#kurse_index").addClass("ui-btn-active");
+			}
+			$scope.init();
+			Navigation.setCurrent({"page" : "kurse"});
 		} else {
-			$("a#kurse_index").addClass("ui-btn-active");
+			Navigation.go("login");
+			//$location.url("/login");
 		}
-		$scope.init();
-		Navigation.setCurrent({"page" : "kurse"});
-	} else {
-		Navigation.go("login");
-		//$location.url("/login");
-	}
+	});
+
 }
 KurseCtrl.$inject = [ '$scope', 'Navigation', 'Auth', 'Kurse' ];

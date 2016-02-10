@@ -1,7 +1,63 @@
 'use strict';
 /* SERVICES */
 var ppitServices = angular.module('ppitapp.services', []);
-
+/*
+ * Connection service. Checking for available url - old people & projects or new pair solution
+ * falls back to dev url if both failed
+ * returns "reject" if network is not available
+ */
+var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function($q, $http) {
+	console.log("Connection start:", $q);
+	var Connection = {
+		loaded		: false,
+		connected	: false,
+		_urls		: [
+			"https://m.pairsolutions.de",
+			"https://m.people-projects-it.com",
+			"https://m.ber.menuplus.de"
+		],
+		deferred	: undefined,
+		serverUrl	: "",
+		config		: undefined
+	};
+	Connection.getUrl = function() {
+		return Connection.serverUrl;
+	};
+	Connection.isConnected = function() {
+		console.log("Connection defer:", Connection.deferred);
+		if(!Connection.loaded) {
+			var startUrls = Connection._urls.slice();
+			$.mobile.loading('show');
+			Connection.tryToConnect(startUrls);
+			Connection.loaded = true;
+		}
+		return Connection.deferred.promise;
+	};
+	Connection.tryToConnect = function (urls) {
+		var url = urls.shift();
+		$http.get(url + "/config.json").
+		success(function (data) {
+			//console.log("tryToConnect success:", data);
+			Connection.serverUrl = url;
+			_URL = url;
+			Connection.connected = true;
+			$.mobile.loading('hide');
+			Connection.config = data;
+			Connection.deferred.resolve(url);
+		}).
+		error(function () {
+			//console.log("tryToConnect failed:", data);
+			if ((urls.length > 0) && !Connection.connected) Connection.tryToConnect(urls);
+			else {
+				Connection.connected = false;
+				$.mobile.loading('hide');
+				Connection.deferred.reject("App kann nicht mit dem Server verbunden werden. Bitte überprüfen Sie Ihre Internetverbindung.");
+			}
+		});
+	};
+	Connection.deferred = $q.defer();
+	return Connection;
+}]);
 /*
  * Application settings storage
  * and start page helper
@@ -395,7 +451,7 @@ var MessagesSvc = ppitServices.factory('Messages', [function() {
 }]);
 
 /* Auth service */
-var AuthSvc = ppitServices.factory('Auth', ['$http', 'Messages', 'Navigation', function($http, Messages, Navigation) {
+var AuthSvc = ppitServices.factory('Auth', ['$http', 'Messages', 'Navigation', 'Connection', function($http, Messages, Navigation, Connection) {
 	//console.log('Auth service start');
 	var AuthService = {};
 	// user credentials
@@ -403,7 +459,6 @@ var AuthSvc = ppitServices.factory('Auth', ['$http', 'Messages', 'Navigation', f
 		username : "",
 		password : ""
 	};
-	AuthService.serverURL = _URL + '/index.php';
 	AuthService.resource = {
 			'login': {
 				method	: 'POST',// hardcoded in login()
@@ -560,8 +615,8 @@ var AuthSvc = ppitServices.factory('Auth', ['$http', 'Messages', 'Navigation', f
 	};
 	
 	// try to load previously saved credentials
-	AuthService.load = function() {
-		//console.log('AuthService.load: start.');
+
+	AuthService._load = function(handler) {
 		var ls = window.localStorage;
 		if (ls) {
 			AuthService.cred = angular.fromJson(ls.getItem("cred"));
@@ -586,6 +641,21 @@ var AuthSvc = ppitServices.factory('Auth', ['$http', 'Messages', 'Navigation', f
 			Messages.addMessage("err", undefined, "Warning: local storage not available!");
 			//showError("Warning: local storage not available!");
 		}
+		if(!!handler) handler();
+	};
+	// wrapper for checking for url and internet access
+	AuthService.load = function(handler) {
+		console.log('AuthService.load called');
+		Connection.isConnected().then(function(url) {
+			console.log("AuthService.load success:", url);
+			AuthService.serverURL = url + '/index.php';
+			AuthService._load(handler);
+		}, function(message) {
+			console.log("AuthService.load failed:", message);
+			Messages.addMessage("wait", "Verbindungsfehler", message);
+			AuthService.sessionKey = "";
+			//if(!!handler) handler();
+		});
 	};
 	
 	// logout function

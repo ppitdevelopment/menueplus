@@ -3,14 +3,14 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android   = "http://schemas.android.com/apk/res/android"
         id = "com.ppit.issmenueplus"
-        version = "1.8"
-        versionCode="470">
+        version = "1.9"
+        versionCode="471">
 	<name>ISS Menü+</name>
 	<description>
-	    PAIR Solutions GmbH © 2013 - 2015
+	    PAIR Solutions GmbH © 2013 - 2016
 	</description>
 	<author href="http://www.people-projects-it.com" email="produktentwicklung@people-projects-it.com">
-	    Aleksei Podgaev @ PAIR Solutions GmbH © 2013-2015
+	    Aleksei Podgaev @ PAIR Solutions GmbH © 2013-2016
 	</author>
 	<gap:platform name="android" />
 	<icon src="icon.png" />
@@ -35,9 +35,7 @@
 	<preference name="permissions" value="none"/>
 	<!-- <feature name="http://api.phonegap.com/1.0/camera"/> -->
 	<!-- <feature name="http://api.phonegap.com/1.0/file"/> -->
-	<access origin="https://10.21.0.11" />
 	<access origin="https://m.ber.menuplus.de" />
-	<access origin="https://141.101.33.77" />
 	<access origin="https://m.people-projects-it.com" />
-	<access origin="https://m-proxy.people-projects-it.com" />
+	<access origin="https://m.pairsolutions.de" />
 </widget>

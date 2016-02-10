@@ -112,14 +112,16 @@ function KontoCtrl($scope, Navigation, Auth, Settings, Datasource) {
 		});
 	};
 	
-	Auth.load();
-	if (Auth.loggedIn()) {
-		// main code here
-		$scope.init();
-		Navigation.setCurrent({"page" : "konto"});
-	} else {
-		Navigation.go("login");
-		//$location.url("/login");
-	}
+	Auth.load(function() {
+		if (Auth.loggedIn()) {
+			// main code here
+			$scope.init();
+			Navigation.setCurrent({"page" : "konto"});
+		} else {
+			Navigation.go("login");
+			//$location.url("/login");
+		}
+	});
+
 }
 KontoCtrl.$inject = [ '$scope', 'Navigation', 'Auth', 'Settings', 'Datasource' ];

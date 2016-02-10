@@ -242,49 +242,50 @@ function ProfileCtrl(Teilnehmer, $scope, Navigation, Auth, Settings, Messages) {
 		}
 	};
 	
-	Auth.load();
-	if (Auth.loggedIn()) {
-		//$scope.pages = Auth.pages;
-		$scope.pages = [];
-		for(var page in Auth.pages) {
-			var title = "";
-			var name = "null";
-			switch(Auth.pages[page]) {
-			case "willkommen":
-				name = "start";
-				title = "Start";
-				break;
-			case "calendar":
-				name = "kalend";
-				title = "Kalender";
-				break;
-			case "konto":
-				name = "konto";
-				title = "Kontoauszug";
-				break;
-			case "stammdaten":
-				name = "profile";
-				title = "Stammdaten";
-				break;
-			case "kurse":
-				name = "kurse";
-				title = "Kurse";
-				break;
-			default:
-				name = "null";
-				break;
-			}
-			if(name != "null") $scope.pages.push({ "name" : name, "title" : title});
-		};
-		// start page to go after login screen
-		$scope.startSeite = Settings.getStart();
-		$scope.photoEditable = (angular.isDefined(Auth.rights) && angular.isDefined(Auth.rights.profilfoto_aendern))? Auth.rights.profilfoto_aendern == 1 : false;
-		//console.log("ProfileCtrl: ", $scope.startSeite);
-		$scope.loadProfile();
-		Navigation.setCurrent({"page" : "profile"});
-	} else {
-		Navigation.go("login");
-		//$location.url("/login");
-	}
+	Auth.load(function() {
+		if (Auth.loggedIn()) {
+			//$scope.pages = Auth.pages;
+			$scope.pages = [];
+			for(var page in Auth.pages) {
+				var title = "";
+				var name = "null";
+				switch(Auth.pages[page]) {
+					case "willkommen":
+						name = "start";
+						title = "Start";
+						break;
+					case "calendar":
+						name = "kalend";
+						title = "Kalender";
+						break;
+					case "konto":
+						name = "konto";
+						title = "Kontoauszug";
+						break;
+					case "stammdaten":
+						name = "profile";
+						title = "Stammdaten";
+						break;
+					case "kurse":
+						name = "kurse";
+						title = "Kurse";
+						break;
+					default:
+						name = "null";
+						break;
+				}
+				if(name != "null") $scope.pages.push({ "name" : name, "title" : title});
+			};
+			// start page to go after login screen
+			$scope.startSeite = Settings.getStart();
+			$scope.photoEditable = (angular.isDefined(Auth.rights) && angular.isDefined(Auth.rights.profilfoto_aendern))? Auth.rights.profilfoto_aendern == 1 : false;
+			//console.log("ProfileCtrl: ", $scope.startSeite);
+			$scope.loadProfile();
+			Navigation.setCurrent({"page" : "profile"});
+		} else {
+			Navigation.go("login");
+			//$location.url("/login");
+		}
+	});
 }
 ProfileCtrl.$inject = [ 'Teilnehmer', '$scope', 'Navigation', 'Auth', 'Settings', 'Messages' ];

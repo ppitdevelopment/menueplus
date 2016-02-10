@@ -51,15 +51,17 @@ function AuthCtrl($scope, Navigation, Auth, Settings) {
 		});
 	};
 	
-	Auth.load();
-	$scope.userStart = Settings.getStart();
-	if (Auth.sessionKey) {
-		//console.log("AuthCtrl.userStart: ", $scope.userStart);
-		//console.log("AuthCtrl try to resume");
-		if(!Settings.realResumeHandler()) Navigation.goCurrent();
-	} else {
-		$scope.reset();
-		Navigation.setCurrent({"page" : "login"});
-	}
+	Auth.load(function() {
+		$scope.userStart = Settings.getStart();
+		if (Auth.sessionKey) {
+			//console.log("AuthCtrl.userStart: ", $scope.userStart);
+			//console.log("AuthCtrl try to resume");
+			if(!Settings.realResumeHandler()) Navigation.goCurrent();
+		} else {
+			$scope.reset();
+			Navigation.setCurrent({"page" : "login"});
+		}
+	});
+
 }
 AuthCtrl.$inject = [ '$scope', 'Navigation', 'Auth', 'Settings' ];

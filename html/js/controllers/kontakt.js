@@ -43,13 +43,15 @@ function PpitKontaktCtrl($scope, Navigation, Auth, Settings, Datasource) {
 			$scope.loaded = true;
 		}
 	};
-	Auth.load();
-	if (Auth.loggedIn()) {
-		// main code here
-		$scope.init();
-		Navigation.setCurrent({"page" : "ppitkontakt"});
-	} else {
-		Navigation.go("login");
-	}
+	Auth.load(function() {
+		if (Auth.loggedIn()) {
+			// main code here
+			$scope.init();
+			Navigation.setCurrent({"page" : "ppitkontakt"});
+		} else {
+			Navigation.go("login");
+		}
+	});
+
 }
 PpitKontaktCtrl.$inject = [ '$scope', 'Navigation', 'Auth', 'Settings', 'Datasource' ];

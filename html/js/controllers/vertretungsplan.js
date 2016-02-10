@@ -61,13 +61,15 @@ function VertretungsplanCtrl($scope, Navigation, Auth, Settings, Datasource) {
 			$scope.$apply();
 		});
 	};
-	Auth.load();
-	if (Auth.loggedIn()) {
-		// main code here
-		$scope.init();
-		Navigation.setCurrent({"page" : "vertretungsplan"});
-	} else {
-		Navigation.go("login");
-	}
+	Auth.load(function() {
+		if (Auth.loggedIn()) {
+			// main code here
+			$scope.init();
+			Navigation.setCurrent({"page" : "vertretungsplan"});
+		} else {
+			Navigation.go("login");
+		}
+	});
+
 }
 VertretungsplanCtrl.$inject = [ '$scope', 'Navigation', 'Auth', 'Settings', 'Datasource' ];

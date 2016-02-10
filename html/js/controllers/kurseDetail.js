@@ -106,12 +106,13 @@ function KurseDetailCtrl($scope, Navigation, Auth, Kurse, $routeParams) {
 		}
 	};
 	
-	Auth.load();
-	if (Auth.loggedIn()) {
-		$scope.init();
-	} else {
-		Navigation.go("login");
-		//$location.url("/login");
-	}
+	Auth.load(function() {
+		if (Auth.loggedIn()) {
+			$scope.init();
+		} else {
+			Navigation.go("login");
+			//$location.url("/login");
+		}
+	});
 }
 KurseDetailCtrl.$inject = [ '$scope', 'Navigation', 'Auth', 'Kurse', '$routeParams'];

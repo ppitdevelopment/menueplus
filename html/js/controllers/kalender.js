@@ -110,94 +110,95 @@ function KalenderCtrl3(Navigation, Teilnehmer, $scope, Kalend2, Auth, $routePara
 	 */
 	$scope.init = function() {
 		//console.log("KalenderCtrl3.init");
-		//console.log("Date selected:", $scope.selectedDate);
-		$scope.abotage = [false,false,false,false,false,false,false];
-		$scope.abotageOld = [false,false,false,false,false,false,false];
-		$scope.aboTyp = 0;
-		var profile = Teilnehmer.getProfile(function(data) {
-			// success
-			//console.log("getProfile success: ", data.teilnehmer);
-			var abotageValue = data.teilnehmer.abotage;
-			var newAbotage = [false,false,false,false,false,false,false];
-			angular.forEach(newAbotage, function(value, key) {
-				var isAbotag = abotageValue & Math.pow(2, key);
-				if(isAbotag) {
-					this[key] = true;
-				}
-			}, newAbotage);
-			$scope.abotage = angular.copy(newAbotage);
-			$scope.abotageOld = angular.copy(newAbotage);
-			$scope.aboTyp = data.teilnehmer.essenabotyp;
-			//console.log("Abotag init: ", newAbotage);
-			//if(Kalend2.started && !Kalend2.needRefresh) $.mobile.loading('hide'); 
-			$scope.$apply();
-		}, function(data) {
-			// error
-			//console.log("error: ", data);
-			Navigation.go("error");
-		});
-		// properties init
-		var wShift = parseInt($routeParams.Shift);
-		$scope.shift = wShift;
-		$scope.type = $routeParams.Type;
-		Navigation.setCurrent({"page" : "kalend", "params" : { "type" : $scope.type, "shift" : wShift}});
-		//$scope.kalend = { 'tage' : [], 'details' : [] };
-		//$scope.dataReady = false;
-		$scope.selectedMenue = {};
-		$scope.selectedMenue.menue = {};
-		$scope.selectedMenue.selectedMenueImage = "css/images/essen.png";
-		$scope.selectedMenue.selectedMenueId = 0;
-		$scope.selectedMenue.selectedMenueDate = "";
-		$scope.selectedMenue.menueNachricht = "";
-		$scope.selectedMenue.selectedMenueClass = "menue-default";
-		//$scope.appUrl = Auth.serverURL;
 		// authorization check
-		Auth.load();
-		if (Auth.sessionKey) {
-			$scope.sessionKey = Auth.sessionKey; 
-			if(!Kalend2.started || Kalend2.needRefresh) {
-				// set up redirect handler if it is not set yet
-				if(Kalend2.cacheRefreshHandler == undefined)
-					Kalend2.cacheRefreshHandler = function() {
-					//alert("previous path: " + $location.path());
-					//console.log("Kalend2: ",Kalend2);
-					//$location.path("/login");
-					//console.log("shift: ",wShift);
+		Auth.load(function() {
+			//console.log("Date selected:", $scope.selectedDate);
+			$scope.abotage = [false,false,false,false,false,false,false];
+			$scope.abotageOld = [false,false,false,false,false,false,false];
+			$scope.aboTyp = 0;
+			var profile = Teilnehmer.getProfile(function(data) {
+				// success
+				//console.log("getProfile success: ", data.teilnehmer);
+				var abotageValue = data.teilnehmer.abotage;
+				var newAbotage = [false,false,false,false,false,false,false];
+				angular.forEach(newAbotage, function(value, key) {
+					var isAbotag = abotageValue & Math.pow(2, key);
+					if(isAbotag) {
+						this[key] = true;
+					}
+				}, newAbotage);
+				$scope.abotage = angular.copy(newAbotage);
+				$scope.abotageOld = angular.copy(newAbotage);
+				$scope.aboTyp = data.teilnehmer.essenabotyp;
+				//console.log("Abotag init: ", newAbotage);
+				//if(Kalend2.started && !Kalend2.needRefresh) $.mobile.loading('hide');
+				$scope.$apply();
+			}, function(data) {
+				// error
+				//console.log("error: ", data);
+				Navigation.go("error");
+			});
+			// properties init
+			var wShift = parseInt($routeParams.Shift);
+			$scope.shift = wShift;
+			$scope.type = $routeParams.Type;
+			Navigation.setCurrent({"page" : "kalend", "params" : { "type" : $scope.type, "shift" : wShift}});
+			//$scope.kalend = { 'tage' : [], 'details' : [] };
+			//$scope.dataReady = false;
+			$scope.selectedMenue = {};
+			$scope.selectedMenue.menue = {};
+			$scope.selectedMenue.selectedMenueImage = "css/images/essen.png";
+			$scope.selectedMenue.selectedMenueId = 0;
+			$scope.selectedMenue.selectedMenueDate = "";
+			$scope.selectedMenue.menueNachricht = "";
+			$scope.selectedMenue.selectedMenueClass = "menue-default";
+			//$scope.appUrl = Auth.serverURL;
+			if (Auth.sessionKey) {
+				$scope.sessionKey = Auth.sessionKey;
+				if(!Kalend2.started || Kalend2.needRefresh) {
+					// set up redirect handler if it is not set yet
+					if(Kalend2.cacheRefreshHandler == undefined)
+						Kalend2.cacheRefreshHandler = function() {
+							//alert("previous path: " + $location.path());
+							//console.log("Kalend2: ",Kalend2);
+							//$location.path("/login");
+							//console.log("shift: ",wShift);
+							Kalend2.init();
+							//$scope.$apply();
+						};
 					Kalend2.init();
-					//$scope.$apply();
-				};
-				Kalend2.init();
-				//if(!Kalend2.started) {
+					//if(!Kalend2.started) {
 					Kalend2.addTagSuccessHandler($scope.successTagHandler);
 					Kalend2.addDetailSuccessHandler($scope.successDetailHandler);
 					Kalend2.addTagErrorHandler($scope.errorHandler);
-					Kalend2.addDetailErrorHandler($scope.errorHandler);					
-				//};
-				Kalend2.getWoche(wShift);
-			} else {
-				//console.log('KalenderCtrl3.init second run. shift: ',wShift);
-				var wResult = Kalend2.getWoche(wShift);
-				//var dResult = Kalender.getDetailedWoche($scope.shift);
-				//console.log('KalenderCtrl3.init second run. kalend: ', wResult);
-				$scope.kalend = wResult;
-				/*
-				if(Kalender.dataIsEmpty()) {
-					//console.log('KalenderCtrl2.init empty data found. Reinitialization!');
-					Kalender.clearCache();
-					Kalender.init();
-					Kalender.addErrorHandler($scope.errorHandler);
-					Kalender.addSuccessHandler($scope.successHandler);
+					Kalend2.addDetailErrorHandler($scope.errorHandler);
+					//};
+					Kalend2.getWoche(wShift);
 				} else {
-					$scope.tage = wResult;
-					$scope.angebote = dResult;					
-				}*/
+					//console.log('KalenderCtrl3.init second run. shift: ',wShift);
+					var wResult = Kalend2.getWoche(wShift);
+					//var dResult = Kalender.getDetailedWoche($scope.shift);
+					//console.log('KalenderCtrl3.init second run. kalend: ', wResult);
+					$scope.kalend = wResult;
+					/*
+					 if(Kalender.dataIsEmpty()) {
+					 //console.log('KalenderCtrl2.init empty data found. Reinitialization!');
+					 Kalender.clearCache();
+					 Kalender.init();
+					 Kalender.addErrorHandler($scope.errorHandler);
+					 Kalender.addSuccessHandler($scope.successHandler);
+					 } else {
+					 $scope.tage = wResult;
+					 $scope.angebote = dResult;
+					 }*/
+				}
+			} else {
+				//console.log('KalenderCtrl2.init auth error!');
+				Navigation.go('login');
+				//$location.path("/login");
 			}
-		} else {
-			//console.log('KalenderCtrl2.init auth error!');
-			Navigation.go('login');
-			//$location.path("/login");
-		}
-		$scope.$apply();
+			$scope.$apply();
+		});
 	};
 	
 	/*
