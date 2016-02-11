@@ -224,3 +224,4 @@ pip-log.txt
 .db
 html/.svn/wc.db
 .svn/wc.db
+/html/phonegap.js

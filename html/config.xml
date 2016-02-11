@@ -4,12 +4,12 @@
         xmlns:android   = "http://schemas.android.com/apk/res/android"
         id = "com.ppit.issmenueplus"
         version = "1.9"
-        versionCode="471">
+        versionCode="472">
 	<name>ISS Menü+</name>
 	<description>
 	    PAIR Solutions GmbH © 2013 - 2016
 	</description>
-	<author href="http://www.people-projects-it.com" email="produktentwicklung@people-projects-it.com">
+	<author href="http://pairsolutions.de" email="produktentwicklung@pairsolutions.de">
 	    Aleksei Podgaev @ PAIR Solutions GmbH © 2013-2016
 	</author>
 	<gap:platform name="android" />

@@ -51,6 +51,7 @@ var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function(
 			else {
 				Connection.connected = false;
 				$.mobile.loading('hide');
+				_URL = url;
 				Connection.deferred.reject("App kann nicht mit dem Server verbunden werden. Bitte überprüfen Sie Ihre Internetverbindung.");
 			}
 		});
@@ -652,11 +653,10 @@ var AuthSvc = ppitServices.factory('Auth', ['$http', 'Messages', 'Navigation', '
 			AuthService._load(handler);
 		}, function(message) {
 			console.log("AuthService.load failed:", message);
-			alert("No internet:" + message);
+			//alert("No internet:" + message);
 			Messages.addMessage("wait", "Verbindungsfehler", message);
 			AuthService.sessionKey = "";
 			Navigation.go("login");
-			//if(!!handler) handler();
 		});
 	};
 	
