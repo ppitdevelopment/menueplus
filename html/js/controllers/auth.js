@@ -1,7 +1,7 @@
 'use strict';
 
 /* Authorization controller */
-function AuthCtrl($scope, Navigation, Auth, Settings) {
+function AuthCtrl($scope, Navigation, Auth, Settings, Connection) {
 	//console.log('AuthCtrl');
 	//console.log('version: ', Auth.version);
 	$scope.ctrlName = "AuthCtrl";
@@ -61,6 +61,8 @@ function AuthCtrl($scope, Navigation, Auth, Settings) {
 	};
 
 	Auth.load(function() {
+		alert("Name: " + Connection.config.name);
+		if(!!Connection.config.logo && Connection.config.logo !== "") $scope.logoSrc = Connection.config.logo;
 		$scope.userStart = Settings.getStart();
 		if (Auth.sessionKey) {
 			//console.log("AuthCtrl.userStart: ", $scope.userStart);
@@ -73,4 +75,4 @@ function AuthCtrl($scope, Navigation, Auth, Settings) {
 	});
 
 }
-AuthCtrl.$inject = [ '$scope', 'Navigation', 'Auth', 'Settings' ];
+AuthCtrl.$inject = [ '$scope', 'Navigation', 'Auth', 'Settings', 'Connection' ];
