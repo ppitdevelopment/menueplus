@@ -50,7 +50,16 @@ function StartCtrl($scope, Navigation, Auth, Kalend2, Kurse, Connection) {
 			return "";
 		}
 	};
-	
+
+	$scope.clickCounter = 0;
+	$scope.titleClick = function() {
+		$scope.clickCounter++;
+		if($scope.clickCounter > 4) {
+			alert(_URL);
+			$scope.clickCounter = 0;
+		}
+	};
+
 	Auth.load(function() {
 		if (Auth.loggedIn()) {
 			$scope.copyrightMsg += Connection.config.name;

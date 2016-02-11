@@ -50,7 +50,16 @@ function AuthCtrl($scope, Navigation, Auth, Settings) {
 			Navigation.go("error");
 		});
 	};
-	
+
+	$scope.clickCounter = 0;
+	$scope.titleClick = function() {
+		$scope.clickCounter++;
+		if($scope.clickCounter > 4) {
+			alert(_URL);
+			$scope.clickCounter = 0;
+		}
+	};
+
 	Auth.load(function() {
 		$scope.userStart = Settings.getStart();
 		if (Auth.sessionKey) {
