@@ -652,8 +652,10 @@ var AuthSvc = ppitServices.factory('Auth', ['$http', 'Messages', 'Navigation', '
 			AuthService._load(handler);
 		}, function(message) {
 			console.log("AuthService.load failed:", message);
+			alert("No internet:" + message);
 			Messages.addMessage("wait", "Verbindungsfehler", message);
 			AuthService.sessionKey = "";
+			Navigation.go("login");
 			//if(!!handler) handler();
 		});
 	};
