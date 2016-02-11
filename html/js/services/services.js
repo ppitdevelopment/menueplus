@@ -47,12 +47,13 @@ var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function(
 		}).
 		error(function () {
 			//console.log("tryToConnect failed:", data);
+			alert("connect to " + url + "failed");
 			if ((urls.length > 0) && !Connection.connected) Connection.tryToConnect(urls);
 			else {
 				Connection.connected = false;
 				$.mobile.loading('hide');
 				_URL = url;
-				Connection.deferred.reject("App kann nicht mit dem Server verbunden werden. Bitte überprüfen Sie Ihre Internetverbindung.");
+				Connection.deferred.reject("App kann nicht mit " + url + " verbunden werden. Bitte überprüfen Sie Ihre Internetverbindung.");
 			}
 		});
 	};
