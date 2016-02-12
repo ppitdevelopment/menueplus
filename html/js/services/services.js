@@ -38,6 +38,7 @@ var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function(
 		$http.get(url + "/config.json").
 		success(function (data) {
 			//console.log("tryToConnect success:", data);
+			alert("connect to " + url + " succeeded: "+ angular.toJson(data));
 			Connection.serverUrl = url;
 			_URL = url;
 			Connection.connected = true;
