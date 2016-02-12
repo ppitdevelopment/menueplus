@@ -47,7 +47,7 @@ var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function(
 		}).
 		error(function () {
 			//console.log("tryToConnect failed:", data);
-			alert("connect to " + url + "failed");
+			alert("connect to " + url + " failed");
 			if ((urls.length > 0) && !Connection.connected) Connection.tryToConnect(urls);
 			else {
 				Connection.connected = false;
