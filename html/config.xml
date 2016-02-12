@@ -3,7 +3,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android   = "http://schemas.android.com/apk/res/android"
         id = "com.ppit.issmenueplus"
-        version = "1.9"
+        version = "1.9.1"
         versionCode="473">
 	<name>ISS Menü+</name>
 	<description>
@@ -36,7 +36,6 @@
 	<preference name="permissions" value="none"/>
 	<!-- <feature name="http://api.phonegap.com/1.0/camera"/> -->
 	<!-- <feature name="http://api.phonegap.com/1.0/file"/> -->
-	<access origin="https://m.ber.menuplus.de" />
 	<access origin="https://m.people-projects-it.com" />
 	<access origin="https://m.pairsolutions.de" />
 </widget>

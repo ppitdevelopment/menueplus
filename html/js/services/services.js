@@ -13,8 +13,7 @@ var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function(
 		connected	: false,
 		_urls		: [
 			"https://m.pairsolutions.de",
-			"https://m.people-projects-it.com",
-			"https://m.ber.menuplus.de"
+			"https://m.people-projects-it.com"
 		],
 		deferred	: undefined,
 		serverUrl	: "",
@@ -45,7 +44,7 @@ var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function(
 		$http.get(url + "/config.json").
 		success(function (data) {
 			//console.log("tryToConnect success:", data);
-			alert("connect to " + url + " succeeded: "+ angular.toJson(data));
+			//alert("connect to " + url + " succeeded: "+ angular.toJson(data));
 			Connection.serverUrl = url;
 			_URL = url;
 			Connection.connected = true;
@@ -55,7 +54,7 @@ var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function(
 		}).
 		error(function () {
 			//console.log("tryToConnect failed:", data);
-			alert("connect to " + url + " failed");
+			//alert("connect to " + url + " failed");
 			if ((urls.length > 0) && !Connection.connected) Connection.tryToConnect(urls);
 			else {
 				Connection.connected = false;
@@ -655,13 +654,13 @@ var AuthSvc = ppitServices.factory('Auth', ['$http', 'Messages', 'Navigation', '
 	};
 	// wrapper for checking for url and internet access
 	AuthService.load = function(handler) {
-		console.log('AuthService.load called');
+		//console.log('AuthService.load called');
 		Connection.isConnected().then(function(url) {
-			console.log("AuthService.load success:", url);
+			//console.log("AuthService.load success:", url);
 			AuthService.serverURL = url + '/index.php';
 			AuthService._load(handler);
 		}, function(message) {
-			console.log("AuthService.load failed:", message);
+			//console.log("AuthService.load failed:", message);
 			//alert("No internet:" + message);
 			Messages.addMessage("wait", "Verbindungsfehler", message);
 			AuthService.sessionKey = "";
