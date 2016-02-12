@@ -21,6 +21,7 @@ var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function(
 	};
 	Connection.reset = function() {
 		alert("Connection reset");
+		Connection.deferred = $q.defer();
 		Connection.connected = false;
 		Connection.loaded = false;
 		Connection.serverUrl = "";
@@ -61,7 +62,8 @@ var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function(
 				Connection.connected = false;
 				$.mobile.loading('hide');
 				_URL = url;
-				Connection.deferred.reject("App kann nicht mit " + url + " verbunden werden. Bitte überprüfen Sie Ihre Internetverbindung.");
+				//Connection.deferred.reject("App kann nicht mit " + url + " verbunden werden. Bitte überprüfen Sie Ihre Internetverbindung.");
+				Connection.deferred.reject("App kann nicht mit dem Server verbunden werden. Bitte überprüfen Sie Ihre Internetverbindung.");
 			}
 		});
 	};
