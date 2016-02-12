@@ -23,7 +23,7 @@
 	<gap:splash src="assets/android/launchscreen-xhdpi.9.png" gap:platform="android" gap:qualifier="xhdpi" />
 	<gap:splash src="assets/android/launchscreen-hdpi.9.png" gap:platform="android" gap:qualifier="hdpi" />
 	<gap:splash src="assets/android/launchscreen-mdpi.9.png" gap:platform="android" gap:qualifier="mdpi" />
-	<preference name="phonegap-version" value="cli-5.1.1" />
+	<preference name="phonegap-version" value="cli-5.2.0" />
 	<preference name="orientation" value="default" />
 	<preference name="target-device" value="universal" />
 	<preference name="fullscreen" value="false" />

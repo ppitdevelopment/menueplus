@@ -20,6 +20,7 @@ var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function(
 		config		: undefined
 	};
 	Connection.reset = function() {
+		alert("Connection reset");
 		Connection.connected = false;
 		Connection.loaded = false;
 		Connection.serverUrl = "";
