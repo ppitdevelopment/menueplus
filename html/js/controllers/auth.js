@@ -60,6 +60,7 @@ function AuthCtrl($scope, Navigation, Auth, Settings, Connection) {
 		}
 	};
 
+	Connection.reset();
 	Auth.load(function() {
 		alert("Name: " + Connection.config.name);
 		if(!!Connection.config.logo && Connection.config.logo !== "") $scope.logoSrc = Connection.config.logo;

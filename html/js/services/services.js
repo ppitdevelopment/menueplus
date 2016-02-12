@@ -20,11 +20,18 @@ var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function(
 		serverUrl	: "",
 		config		: undefined
 	};
+	Connection.reset = function() {
+		Connection.connected = false;
+		Connection.loaded = false;
+		Connection.serverUrl = "";
+		_URL = "unset";
+
+	};
 	Connection.getUrl = function() {
 		return Connection.serverUrl;
 	};
 	Connection.isConnected = function() {
-		console.log("Connection defer:", Connection.deferred);
+		//console.log("Connection defer:", Connection.deferred);
 		if(!Connection.loaded) {
 			var startUrls = Connection._urls.slice();
 			$.mobile.loading('show');
