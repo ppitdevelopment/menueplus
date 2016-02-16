@@ -6,7 +6,7 @@ var ppitServices = angular.module('ppitapp.services', []);
  * falls back to dev url if both failed
  * returns "reject" if network is not available
  */
-var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function($q, $http) {
+var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', '$window', 'Navigation', function($q, $http, $window, Navigation) {
 	console.log("Connection start:", $q);
 	var Connection = {
 		loaded		: false,
@@ -14,6 +14,7 @@ var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function(
 		_urls		: [
 			"https://m.pairsolutions.de",
 			"https://m.people-projects-it.com"
+			,"https://m.ber.menuplus.de"
 		],
 		deferred	: undefined,
 		serverUrl	: "",
@@ -41,17 +42,20 @@ var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function(
 		}
 		return Connection.deferred.promise;
 	};
+	Connection.finishConnect = function(url, config) {
+		Connection.serverUrl = url;
+		_URL = url;
+		Connection.connected = true;
+		$.mobile.loading('hide');
+		Connection.config = config;
+	};
 	Connection.tryToConnect = function (urls) {
 		var url = urls.shift();
 		$http.get(url + "/config.json").
 		success(function (data) {
 			//console.log("tryToConnect success:", data);
 			//alert("connect to " + url + " succeeded: "+ angular.toJson(data));
-			Connection.serverUrl = url;
-			_URL = url;
-			Connection.connected = true;
-			$.mobile.loading('hide');
-			Connection.config = data;
+			Connection.finishConnect(url, data);
 			Connection.deferred.resolve(url);
 		}).
 		error(function () {
@@ -68,6 +72,29 @@ var ConnectionSvc = ppitServices.factory('Connection', ['$q', '$http', function(
 		});
 	};
 	Connection.deferred = $q.defer();
+	$window.document.addEventListener("deviceready", function() {
+		$window.document.addEventListener("pause", function() {
+			window.localStorage.setItem("_connection", Connection.serverUrl);
+			window.localStorage.setItem("_connection_data", angular.toJson(Connection.config));
+		}, false);
+		$window.document.addEventListener("resume", function() {
+			if(!Connection.connected) {
+				var _conn = window.localStorage.getItem("_connection");
+				if(!!_conn) {
+					Connection.isConnected().then(function(url) {
+						window.localStorage.setItem("_connection", Connection.serverUrl);
+					}, function() {
+						Navigation.go("login");
+					});
+				} else {
+					var _data = window.localStorage.getItem("_connection_data");
+					Connection.finishConnect(_conn, angular.fromJson(_data));
+				}
+			}
+
+		}, false);
+	}, false);
+
 	return Connection;
 }]);
 /*
