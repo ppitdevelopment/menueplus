@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.ppit.issmenueplusdev" version="1.9.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <allow-navigation href="cdvfile:*" />
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <name>ISS Menü+ DEV VER</name>
+    <description>
+        PAIR Solutions GmbH © 2013 - 2019
+    </description>
+    <author email="support@phonegap.com" href="http://phonegap.com">
+        PAIR Solutions GmbH © 2013-2019
+    </author>
+    <content src="index.html" />
+    <access origin="https://m.people-projects-it.com" />
+    <access origin="https://m.pairsolutions.de" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <icon density="ldpi" src="www/res/icon/android/ldpi.png" />
+    <icon density="mdpi" src="www/res/icon/android/mdpi.png" />
+    <icon density="hdpi" src="www/res/icon/android/hdpi.png" />
+    <icon density="xhdpi" src="www/res/icon/android/xhdpi.png" />
+    <icon density="xxhdpi" src="www/res/icon/android/xxhdpi.png" />
+    <icon density="xxxhdpi" src="www/res/icon/android/xxxhdpi.png" />
+    <splash density="land-ldpi" src="www/res/screen/android/splash-land-ldpi.png" />
+    <splash density="land-mdpi" src="www/res/screen/android/splash-land-mdpi.png" />
+    <splash density="land-hdpi" src="www/res/screen/android/splash-land-hdpi.png" />
+    <splash density="land-xhdpi" src="www/res/screen/android/splash-land-xhdpi.png" />
+    <splash density="land-xxhdpi" src="www/res/screen/android/splash-land-xxhdpi.png" />
+    <splash density="land-xxxhdpi" src="www/res/screen/android/splash-land-xxxhdpi.png" />
+    <splash density="port-ldpi" src="www/res/screen/android/splash-port-ldpi.png" />
+    <splash density="port-mdpi" src="www/res/screen/android/splash-port-mdpi.png" />
+    <splash density="port-hdpi" src="www/res/screen/android/splash-port-hdpi.png" />
+    <splash density="port-xhdpi" src="www/res/screen/android/splash-port-xhdpi.png" />
+    <splash density="port-xxhdpi" src="www/res/screen/android/splash-port-xxhdpi.png" />
+    <splash density="port-xxxhdpi" src="www/res/screen/android/splash-port-xxxhdpi.png" />
+    <allow-intent href="market:*" />
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="splashscreen" value="splash" />
+    <preference name="SplashShowOnlyFirstTime" value="false" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="android-targetSdkVersion" value="29" />
+</widget>

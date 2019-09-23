@@ -1,0 +1,49 @@
+<div data-role="page" data-theme="b" data-title="Kurse" id="kursePage"
+	ng-controller="KurseCtrl">
+	<div data-role="header" data-position="fixed" data-theme="f">
+		<div data-role="navbar" class="nav-glyphs">
+			<ul>
+				<li><a href="#" id="startBtn" ng-click="start()"
+					data-icon="custom">Start...</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /header -->
+
+	<div class="jqmpage" data-role="content">
+		<ul data-role="listview" data-theme="d" data-divider-theme="e"  data-count-theme="e">
+			<li data-role="list-divider"><h1>{{modeTitle}}</h1></li>
+			<li ng-repeat="kurs in kurse.kursliste"><a href="#" ng-class="kurs.statusClass"
+				ng-click="kurseDetail(kurs.kursstammdaten.kurs_id)"><!-- ng-href="kursedetail/{{kurs.kursstammdaten.kurs_id}}"> -->
+				<img ng-show="kurs.statusImg.length > 0" ng-src="{{kurs.statusImg}}">
+				<div ng-show="kurs.statusTitle.length > 0" class="status" ng-class="kurs.statusClass"><div class="status-label"><span>{{kurs.statusTitle}}</span></div></div>
+				<h2>{{kurs.kursstammdaten.name}}</h2>
+				<p ng-bind-html="kurs.kursstammdaten.beschreibung_short"></p>
+				<p><strong>{{kurs.kursstammdaten.preis_pro_periode | currency:EUR}} / {{kurs.kursstammdaten.periode}}</strong></p>
+			</a></li>
+			<li ng-show="kurse.kursliste.length == 0">Leider sind keine Kurse vorhanden.</li>
+			<li ng-show="errorMsg.length > 0">{{errorMsg}}</li>
+		</ul>
+		<div id="errorPopup" data-role="popup" data-opened="errorMsg.length > 0" data-theme="d" data-overlay-theme="a" data-position-to="window" data-transition="none" data-dismissible="false">
+			<div data-role="header"><h1>Fehler</h1></div>
+			<div style="padding:10px 20px;">
+				<h3>{{errorMsg}}</h3>
+				<button data-theme="b" data-icon="check" ng-click="start()">OK</button>
+			</div>
+		</div>
+	</div>
+	<!-- /content -->
+	<div data-role="footer" data-id="kurseFooter" data-position="fixed"
+		data-theme="c">
+		<div data-role="navbar" class="nav-glyphs">
+			<ul>
+				<li><a href="#" id="kurse_index" ng-click="toggle('index')"
+					data-icon="custom">Anmeldung</a></li>
+				<li><a href="#" id="kurse_meine" ng-click="toggle('meine')"
+					data-icon="custom">Meine Kurse</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /footer -->
+</div>
+<!-- /page -->

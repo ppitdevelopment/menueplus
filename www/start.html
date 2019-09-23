@@ -1,0 +1,40 @@
+<div data-role="page" data-theme="g" data-title="Start" id="start" ng-controller="StartCtrl">
+
+	<div data-role="header" data-position="fixed" data-theme="f">
+		<h1 ng-click="titleClick()">Start</h1>
+	</div>
+	<!-- /header -->
+
+	<div class="jqmpage" data-role="content" class="nav-glyphs">
+		<div data-role="navbar" class="nav-glyphs">
+			<ul>
+				<li><a ng-class="buttonClass('calendar')" href="#" id="kalender" ng-click="goKalender()" data-icon="custom" data-theme="d">Kalender</a></li>
+				<li><a ng-class="buttonClass('kurse')" href="#" id="kurse" ng-click="goKurse()" data-icon="custom" data-theme="d">Kurse</a></li>
+				
+			</ul>
+		</div>
+		<div data-role="navbar" class="nav-glyphs">
+			<ul>
+				<li><a ng-class="buttonClass('konto')" href="#" id="kontoauszug"    ng-click="goKonto()"    data-icon="custom" data-theme="d">Kontoauszug</a></li>
+				<li><a ng-class="buttonClass('stammdaten')" href="#" id="stammdaten"  ng-click="goProfile()"  data-icon="custom" data-theme="d">Stammdaten</a></li>
+			</ul>
+		</div>
+		<div data-role="navbar" class="nav-glyphs">
+			<ul>
+				<li><a ng-class="buttonClass('vertretungsplan')" href="#" id="vertretungsplan" ng-click="goVertretungsplan()" data-icon="custom" data-theme="d">Vertretungsplan<span class="vertretungen_badge" ng-show="anzahl_vertretungen > 0">{{anzahl_vertretungen}}</span></a></li>
+				<li><a href="#" id="kontakt"  ng-click="goPpitKontakt()"  data-icon="custom" data-theme="d">Kontakt</a></li>
+			</ul>
+		</div>
+		<div data-role="navbar" class="nav-glyphs">
+			<ul>
+				<li><a href="#" id="logout" ng-click="logout()" data-icon="custom" data-theme="d">Abmelden</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /content -->
+	<div data-role="footer" data-position="fixed" data-theme="f">
+		<p align="center">&copy; {{copyrightMsg}}</p>
+	</div>
+	<!-- /footer -->
+</div>
+<!-- /page -->

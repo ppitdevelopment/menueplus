@@ -1,0 +1,186 @@
+<div data-role="page" data-theme="b" data-title="Kalender" id="kalendb"
+	ng-controller="KalenderCtrl3" ngm-swipeleft="nextWoche()"
+	ngm-swiperight="prevWoche()">
+
+	<div data-role="header" data-position="fixed" data-theme="f">
+		<div data-role="navbar" class="nav-glyphs">
+			<ul>
+				<li><a href="#" id="startBtn" ng-click="start()" data-icon="custom">Start...</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /header -->
+
+	<div class="jqmpage" data-role="content">
+		<div data-role="collapsible-set" data-content-theme="d">
+			<div ng-repeat="tag in kalend.tage" id="coll-{{$index}}" data-role="collapsible" ngm-swipeleft="nextWoche()"
+				ngm-swiperight="prevWoche()" data-collapsed="!isToday(tag.datum)">
+				<h3 ng-init="tagIdx = $index" ng-click="datumSelect($event, tag.datum)"><span class="datum" style="float: left">{{tag.datum | date:'EEEE, MMM d'}} <span ngm-if="tag.feiertag_name != ''">- {{tag.feiertag_name}}</span></span>
+					<span ngm-if="hasMenues(tag)">
+						<span ngm-if="isAbotag(tagIdx)">
+							<span ngm-if="isAngemeldet(tag)"><img src="css/images/apfel_abo.png" width="16px" height="16px" style="float: right; margin-right: 6px" /></span>
+							<span ngm-if="!isAngemeldet(tag)"><img src="css/images/kreuz_abo.png" width="16px" height="16px" style="float: right; margin-right: 6px" /></span>
+						</span>
+						<span ngm-if="!isAbotag(tagIdx)">
+							<span ngm-if="isAngemeldet(tag)"><img src="css/images/icon_spoon_color.png" width="16px" height="16px" style="float: right; margin-right: 6px" /></span>
+							<span ngm-if="!isAngemeldet(tag)"><img src="css/images/icon_spoon_gray.png" width="16px" height="16px" style="float: right; margin-right: 6px" /></span>
+						</span>
+					</span>
+					<span ngm-if="hasCourses(tag)"><img src="css/images/kurse.png" width="16px" height="16px" style="float: right; margin-right: 6px" /></span>
+					<span ngm-if="hasEvents(tag) || tag.vertretungsplan.length > 0"><img src="css/images/info.png" width="16px" height="16px" style="float: right; margin-right: 6px" /></span>
+					<span ngm-if="tag.ferientag == 1"><img src="css/images/ferien.png" width="16px" height="16px" style="float: right; margin-right: 6px" /></span>
+				</h3>
+				<div ngm-if="!isEmptyDay(tag)">
+					<div ng-repeat="detail in kalend.details[tagIdx].detail_kostenarten">
+						<div class="ui-grid-solo detail-header">
+							<div class="ui-block-a"><div class="ui-bar ui-bar-e"><span ng-bind="getDetailTitle(tagIdx, detail.detail_kostenartart_id)"></span></div></div>
+						</div>
+						<ul ng-init="detailIdx = $index" data-role="listview" ng-repeat="angebot in detail.kostenarten" data-theme="d" data-split-icon="info" data-split-theme="d">
+							<li ng-init="angebotIdx = $index" ngm-if="angebot.menues.length > 0">
+								<fieldset data-role="controlgroup" data-mini="true">
+									<label ng-repeat="menue in angebot.menues">
+										<input 
+											ng-click="selectMenue(tagIdx,detailIdx,angebotIdx,$index)"
+											id="menue-{{tagIdx}}-{{angebotIdx}}-{{menue.menue_nr}}" type="radio" value="1" name="menue-{{tagIdx}}-{{angebotIdx}}"
+											ng-model="kalend.details[tagIdx].detail_kostenarten[detailIdx].kostenarten[angebotIdx].menues[$index].ausgewaehlt"
+											ng-disabled="kalend.details[tagIdx].detail_kostenarten[detailIdx].kostenarten[angebotIdx].aenderbar == '0' || kalend.details[tagIdx].detail_kostenarten[detailIdx].kostenarten[angebotIdx].menues[$index].menge_verfuegbar <= 0 || menue.aenderbar == '0'"
+											ng-checked="kalend.details[tagIdx].detail_kostenarten[detailIdx].kostenarten[angebotIdx].menues[$index].ausgewaehlt == '1'">
+										<span ng-bind-html-unsafe="menue.menue_text"></span>&nbsp;<span ngm-if="menue.allergie_konflikte.length > 0" style="color: red; font-weight: bold;">!</span><br/>
+										<span ngm-if="menue.preis > 0">Preis: {{menue.preis | currency}}</span>&nbsp;<span ngm-if="menue.menge_verfuegbar <= 0" style="color:white;background-color:red;opacity: 1;">Ausverkauft !</span>
+									</label>
+									<label ngm-if="kalend.details[tagIdx].detail_kostenarten[detailIdx].kostenarten[angebotIdx].pflicht == '0'">
+										<input ng-init="lMenue = agebot.menues.length"
+											ng-click="selectMenue(tagIdx,detailIdx,angebotIdx,lMenue)"
+											ng-checked="isAngemeldet(tag) == false"
+											ng-disabled="kalend.details[tagIdx].detail_kostenarten[detailIdx].kostenarten[angebotIdx].aenderbar == '0'"
+											id="menue-0choice-{{tagIdx}}-{{angebotIdx}}" type="radio" value="-1" name="menue-{{tagIdx}}-{{angebotIdx}}">
+										vom Essen abmelden
+									</label>
+								</fieldset>
+							</li>
+							<li ng-repeat="termin in angebot.termine">
+								<a href="#" ng-click="kurseDetails(termin.kurs_id)"><!-- ng-href="kursedetail/{{termin.kurs_id}}" -->
+									<h5>{{termin.kurs_name}}</h5>
+									<div class="ui-grid-a">
+										<div class="ui-block-a"><p class="termine location">Treffpunkt: {{termin.treffpunkt}}</p></div>
+										<div class="ui-block-b"><p class="termine time">{{termin.start}} - {{termin.ende}}</p></div>
+									</div>
+								</a>
+							</li>
+						</ul>
+						<div ngm-if="isAbotageEnabled(tagIdx, detail)">
+							<ul data-role="listview" data-theme="d">
+								<li><label><input data-theme="e" data-mini="true" name="abotage_{{tagIdx}}_checkbox" type="checkbox" ng-model="abotage[tagIdx]" ng-change="aboChange(tagIdx)">{{tag.datum | date:'EEEE'}} als Abo wählen</label></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div ngm-if="hasEvents(tag)">
+					<!-- <h4>Events</h4> -->
+					<div class="ui-grid-solo detail-header" style="margin-top:10px;">
+						<div class="ui-block-a"><div class="ui-bar ui-bar-e">Termine</div></div>
+					</div>
+					<ul data-role="listview" data-theme="d" data-divider-theme="e">
+						<li ng-repeat="event in tag.events">
+							<img class="menue-pic" ngm-if="event.bild_id != ''" align="left" alt="Event" ng-src="{{appUrl}}/img/{{event.bild_id}}.jpg?sk={{sessionKey}}">
+							{{event.beschreibung}}
+							<p class="termine time" style="margin-top:0.5em;" ng-show="event.showTime">{{event.datum_von | date:'HH:mm'}}</p>
+						</li>
+					</ul>
+				</div>
+				<div ngm-if="tag.vertretungsplan.length > 0">
+					<div class="ui-grid-solo detail-header" style="margin-top:10px;">
+						<div class="ui-block-a"><div class="ui-bar ui-bar-e">Vertretungen</div></div>
+					</div>
+					<ul data-role="listview" data-theme="d" data-divider-theme="e">
+						<li ng-repeat="item in tag.vertretungsplan">
+							<a href="#" ng-click="vertretungsplan()">
+								<h5 class="termine time" style="margin-top:0.5em;">{{item.datum | date:'HH:mm'}} ({{item.vertretungsart}}):</h5>
+								<p style="margin-top:0.5em;">{{item.bemerkung}}</p>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div ngm-if="isEmptyDay(tag)" class="emptyDay">&nbsp;</div>
+			</div>
+		</div>
+		<div id="menuePopup" data-role="popup" data-theme="d"
+			data-overlay-theme="b" data-transition="none"
+			data-position-to="window">
+			<div data-role="header">
+				<h1 id="menueHeader">Menüwahl bestätigen</h1>
+			</div>
+			<div data-role="content">
+			<!-- 
+				<span>selected date: {{selectedMenue.selectedMenueDate}}</span>
+				<span>selected date core: {{selectedDate}}</span> -->
+				<p ng-class="selectedMenue.selectedMenueClass"><img alt="Menue image" ng-src="{{selectedMenue.selectedMenueImage}}" src="css/images/essen.png"><span ng-bind-html-unsafe="selectedMenue.menue.menue_text"></span></p>
+				<div ng-switch="selectedMenue.menue.allergie_konflikte.length > 0">
+					<div ng-switch-when="true">
+						<p style="color:red">
+							Es existieren Allergie-Konflikte bei folgenden Zusatzstoffen:
+							<span ng-repeat="allergie in selectedMenue.menue.allergie_konflikte"> {{allergie.name}} ({{allergie.kurzname}})<span ngm-if="!$last">,</span><span ngm-if="$last">.</span></span>
+						</p>
+						<div ngm-if="selectedMenue.menue.ersatzkomponenten.length > 0">
+							<hr />
+							<p>Bitte wählen Sie Ihre Wunsch-Ersatzkomponente:</p>
+							<fieldset data-role="controlgroup" data-mini="true">
+								<label ng-repeat="ersatz in selectedMenue.menue.ersatzkomponenten" for="ersatz-{{ersatz.speise_id}}">
+									{{ersatz.bezeichnung}} <span ngm-if="ersatz.zusatzstoffe.length > 0">(<span ng-repeat="zusatzstoffe in ersatz.zusatzstoffe"> {{zusatzstoffe.kurzname}}<span ngm-if="!$last">,</span></span>)</span>
+									<input type="checkbox" id="ersatz-{{ersatz.speise_id}}"
+										ng-model="selectedMenue.menue.ersatzkomponenten[$index].ausgewaehlt"
+										ng-checked="ersatz.ausgewaehlt == '1'" />
+								</label>
+							</fieldset>
+						</div>
+					</div>
+				</div>
+				<hr ng-show="nachricht_sekretariat == 1" />
+				<textarea ng-show="nachricht_sekretariat == 1" ng-model="selectedMenue.menueNachricht" name="nachricht" id="nachricht" placeholder="Wichtige Mitteilung an das Sekretariat?"></textarea>
+				<span id="postResult" style="color:red;font-weight:bold">&nbsp;</span>
+				<fieldset class="ui-grid-a ui-responsive">
+					<div class="ui-block-a">
+						<button ng-click="menueOk()" data-role="button"
+							data-icon="check" data-theme="b">OK</button>
+					</div>
+					<div class="ui-block-b">
+						<button ng-click="menueCancel()" data-role="button"
+							data-icon="delete" data-theme="c">Abbrechen</button>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		<div id="abotagPopup" data-role="popup" data-theme="d" data-dismissible="false"
+			data-overlay-theme="b" data-transition="none"
+			data-position-to="window">
+			<div data-role="header">
+				<h1>Bitte bestätigen:</h1>
+			</div>
+			<div data-role="content">
+				<p>{{aboText}}</p>
+				<fieldset class="ui-grid-a ui-responsive">
+					<div class="ui-block-a">
+						<button ng-click="aboOk()" data-role="button"
+							data-icon="check" data-theme="b">OK</button>
+					</div>
+					<div class="ui-block-b">
+						<button ng-click="aboCancel()" data-role="button"
+							data-icon="delete" data-theme="c">Abbrechen</button>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+	<!-- /content -->
+	<div data-role="footer" data-id="kalenderFooter" data-position="fixed" data-theme="c">
+		<div data-role="navbar" class="nav-glyphs">
+			<ul>
+				<li><a href="#" id="prev" ng-click="prevWoche()" data-icon="arrow-l">Woche</a></li>
+				<li><a href="#" id="aktuel" ng-click="aktWoche()" data-icon="grid">heute</a></li>
+				<li><a href="#" id="next" ng-click="nextWoche()" data-icon="arrow-r">Woche</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /footer -->
+</div>
+<!-- /page -->

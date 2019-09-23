@@ -1,0 +1,327 @@
+@CHARSET "UTF-8";
+
+.ui-content .detail-header, .ui-content .ui-listview {
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: -10px;
+    padding-bottom: 10px;
+}
+
+.ui-controlgroup-controls {
+	width: 100%;
+}
+
+h3.emptyDay+.ui-collapsible-content {
+	padding: 0 0;
+}
+
+div.emptyDay {
+	height: 0px;
+}
+
+.nav-glyphs .ui-btn .ui-btn-inner {
+    padding-top: 40px !important;
+}
+.nav-glyphs .ui-btn .ui-icon {
+    border-radius: 0 0 0 0 !important;
+    /*
+    -moz-border-radius: 1px;
+	-webkit-border-radius: 1px;
+	border-radius: 1px;
+	*/
+    box-shadow: none !important;
+    /*
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.4);
+    -webkit-box-shadow:0 1px 0 rgba(255,255,255,.4);
+    box-shadow:0 1px 0 rgba(255,255,255,.4);
+    */
+    height: 32px !important;
+    margin-left: -16px !important;
+    width: 32px !important;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 50% 50%;
+	background-size: 32px 32px;
+}
+#vertretungsplan .ui-icon {
+	background-image: url('images/icons/icon-intersection.png');
+	background: url('images/icons/icon-intersection.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#kontakt .ui-icon {
+	background-image: url('images/icons/icon-phone-call.png');
+	background: url('images/icons/icon-phone-call.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#kalender .ui-icon {
+	background-image: url('images/icons/icon-calendar.png');
+	background: url('images/icons/icon-calendar.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#kontoauszug .ui-icon {
+	background-image: url('images/icons/icon-piggybank.png');
+	background: url('images/icons/icon-piggybank.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#stammdaten .ui-icon {
+	background-image: url('images/icons/icon-user.png');
+	background: url('images/icons/icon-user.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#logout .ui-icon {
+	background-image: url('images/icons/icon-off.png');
+    background: url('images/icons/icon-off.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#password .ui-icon {
+	background-image: url('images/icons/icon-key.png');
+    background: url('images/icons/icon-key.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#options .ui-icon {
+	background-image: url('images/icons/icon-cog.png');
+    background: url('images/icons/icon-cog.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#startBtn .ui-icon {
+	background-image: url('images/icons/white/icon-homealt.png');
+    background: url('images/icons/white/icon-homealt.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#prev .ui-icon {
+	background-image: url('images/icons/icon-circleleft.png');
+    background: url('images/icons/icon-circleleft.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#next .ui-icon {
+	background-image: url('images/icons/icon-circleright.png');
+    background: url('images/icons/icon-circleright.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#aktuel .ui-icon {
+	background-image: url('images/icons/icon-check.png');
+    background: url('images/icons/icon-check.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#camera .ui-icon {
+	background-image: url('images/icons/icon-camera.png');
+    background: url('images/icons/icon-camera.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#fotolib .ui-icon {
+	background-image: url('images/icons/icon-images-gallery.png');
+    background: url('images/icons/icon-images-gallery.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#fotodelete .ui-icon {
+	background-image: url('images/icons/icon-trash.png');
+    background: url('images/icons/icon-trash.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#kurse .ui-icon {
+	background-image: url('images/icons/icon-groups.png');
+    background: url('images/icons/icon-groups.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#kurse_meine .ui-icon {
+	background-image: url('images/icons/icon-user.png');
+    background: url('images/icons/icon-user.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#kurse_index .ui-icon {
+	background-image: url('images/icons/icon-groups.png');
+    background: url('images/icons/icon-groups.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#kurse_submit.select .ui-icon {
+	background-image: url('images/icons/icon-ok-circle.png');
+    background: url('images/icons/icon-ok-circle.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#kurse_submit.deselect .ui-icon {
+	background-image: url('images/icons/icon-remove-circle.png');
+    background: url('images/icons/icon-remove-circle.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#error-refresh .ui-icon {
+	background-image: url('images/icons/white/icon-refresh.png');
+	background: url('images/icons/white/icon-refresh.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+#error-ok .ui-icon {
+	background-image: url('images/icons/white/icon-ok-circle.png');
+	background: url('images/icons/white/icon-ok-circle.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+
+.phone .ui-icon {
+	background-image: url('images/icons/icon-phone-call.png');
+	background: url('images/icons/icon-phone-call.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+.email .ui-icon {
+	background-image: url('images/icons/icon-emailalt.png');
+	background: url('images/icons/icon-emailalt.png') no-repeat scroll 50% 50% / 32px 32px transparent;
+}
+
+.vertretungen_badge {
+	display: block;
+	position: absolute;
+	top: -24px;
+	right: 0;
+	z-index: 100;
+	color: #ff6666;
+	height: 24px;
+	margin-left: -12px;
+	width: 24px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 50% 50%;
+	background-size: 24px 24px;
+	background-image: url('images/icons/icon-comment.png');
+	background: url('images/icons/icon-comment.png') no-repeat scroll 50% 50% / 24px 24px transparent;
+	vertical-align: middle;
+}
+
+.termine {
+	padding-left: 20px;
+	line-height: 16px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 0% 50%;
+	background-size: 16px 16px;
+}
+
+.time {
+	background-image: url('images/icons/icon-time.png');
+	background: url('images/icons/icon-time.png') no-repeat scroll 0% 50% / 16px 16px transparent;
+}
+
+.location {
+	background-image: url('images/icons/icon-intersection.png');
+	background: url('images/icons/icon-intersection.png') no-repeat scroll 0% 50% / 16px 16px transparent;
+}
+
+.person {
+	background-image: url('images/icons/icon-user.png');
+	background: url('images/icons/icon-user.png') no-repeat scroll 0% 50% / 16px 16px transparent;
+}
+
+.ui-li-thumb, .ui-listview .ui-li-icon {
+    left: 1px;
+    /* max-height: 80px; */
+    max-width: 80px;
+    position: absolute;
+    top: 0.7em;
+}
+#message .ui-li-thumb {
+	left: 1em;
+	position: absolute;
+	top: 0.5em;
+}
+#kursePage .ui-li-thumb {
+    left: 1em;
+    position: absolute;
+    top: -1px;
+}
+a.ui-link-inherit.status_empty {
+	padding-left: 15px !important;
+}
+
+#profileTable {
+	width: 100%;
+	border: 0px solid #BBBBBB;
+	margin: 0;
+	padding: 0;
+	border-collapse: collapse;
+}
+#profileTable td {
+	width: 50%;
+	margin: 0;
+	padding: 0;
+	border: 0px solid #BBBBBB;
+}
+#profileTable td p {
+	margin-top: 0;
+	
+}
+.profile-pic {
+    max-height: 138px;
+    /* max-height: 70px; */
+    /* max-width: 139px; */
+    float: left;
+}
+.menue-default {
+	text-align: left;
+}
+.menue-default img {
+    float: left;
+    margin-right: 4px;
+}
+.menue-pic {
+	text-align: center;
+}
+.menue-pic img {
+    /* max-height: 138px; */
+    /* max-height: 70px; */
+    max-width: 236px;
+    /* float: left; */
+    margin: 2px;
+    
+}
+.menue-pic span {
+	display: block;
+	text-align: left;
+}
+h3.ui-li-aside {
+	margin: 0.6em 0;
+}
+.ui-li-aside {
+	margin: 0 0;
+}
+.error {
+	color: #C00;
+	font-weight: bold;
+}
+#passwordEdit, #optionsEdit, #menuePopup {
+	min-width: 120px;
+	max-width: 460px;
+}
+
+.ui-grid-a p.ui-li-desc {
+	margin: 0px;
+}
+.status-list-item {
+	padding: 0 !important;
+	min-height: 80px;
+	padding-left: 100px !important;
+}
+.list-item-description p {
+	margin: 0 !important;
+	margin-top: 0.5em !important;
+}
+.status-list-item img {
+	left: 1em;
+	position: absolute;
+	top: -1px;
+	max-width: 80px;
+	float: left;
+	margin-right: 10px;
+}
+.status {
+	position: absolute;
+	display: block;
+	top: 0px;
+	left: 20px;
+	height: 60px;
+	width: 60px;
+	-webkit-transform: rotate(270deg);   
+	-moz-transform: rotate(270deg);
+	-ms-transform: rotate(270deg);
+	-o-transform: rotate(270deg);
+	transform: rotate(270deg);
+}
+.status-label {
+	width: 100%;
+	height: 12px;
+	margin: 6px 2px;
+	text-align: center;
+}
+.status .status-label span {
+	color: #FFF;
+	font-weight: 400;
+	font-size: 10px;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+/*
+@media all and (max-width: 35em) {
+	#passwordEdit, #optionsEdit, #menuePopup {
+		min-width: 120px;
+		max-width: 290px;
+	}
+	.ui-responsive .ui-block-a, .ui-responsive .ui-block-b, .ui-responsive .ui-block-c, .ui-responsive .ui-block-d, .ui-responsive .ui-block-e {
+	    float: none;
+	    width: 100%;
+	}
+}
+*/

@@ -1,0 +1,22 @@
+{
+  "name": "com.ppit.issmenueplus",
+  "version": "1.9.1",
+  "displayName": "ISS Menü+",
+  "cordova": {
+    "platforms": [
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-device": {},
+      "cordova-plugin-file": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-splashscreen": {}
+    }
+  },
+  "dependencies": {
+    "cordova-android": "~7.1.4",
+    "cordova-plugin-splashscreen": "^5.0.3",
+    "cordova-plugin-device": "~1.1.6",
+    "cordova-plugin-file": "~4.3.3"
+  }
+}
