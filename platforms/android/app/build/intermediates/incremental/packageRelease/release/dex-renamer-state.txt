@@ -1,4 +1,0 @@
-#Mon Aug 26 16:29:45 EEST 2019
-base.0=D\:\\repos\\mobile_menuplus\\menuplusnew\\platforms\\android\\app\\build\\intermediates\\transforms\\dex\\release\\0
-path.0=classes.dex
-renamed.0=classes.dex
