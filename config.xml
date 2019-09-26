@@ -14,7 +14,7 @@
     <preference name="splashscreen" value="splash" />
     <preference name="SplashShowOnlyFirstTime" value="false"/>
     <preference name="AutoHideSplashScreen" value="true" />
-    <preference name="android-minSdkVersion" value="16" />
+    <preference name="android-minSdkVersion" value="19" />
     <preference name="android-targetSdkVersion" value="29" />
     <plugin name="cordova-plugin-device" source="npm" spec="~1.1.6" />
     <plugin name="cordova-plugin-file" source="npm" spec="~4.3.3" />
