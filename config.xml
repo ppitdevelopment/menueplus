@@ -2,10 +2,10 @@
 <widget id="com.ppit.issmenueplus" version="1.9.4" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>ISS Menü+</name>
     <description>
-        PAIR Solutions GmbH © 2013 - 2019
+        PAIR Solutions GmbH © 2013 - 2020
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
-        PAIR Solutions GmbH © 2013-2019
+        PAIR Solutions GmbH © 2013-2020
     </author>
     <content src="index.html" />
     <access origin="https://m.people-projects-it.com" />
